@@ -1,0 +1,31 @@
+{
+    "name": "Jupyter Data Science (GPU)",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        "--gpus=all",
+        "--shm-size=2gb",
+        "--net=host" // Otimiza a comunicação do kernel Jupyter com o VS Code
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Garante que o VS Code use o Python do container para o Jupyter
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "jupyter.askForKernelRestart": false,
+                "notebook.output.textLineLimit": 100,
+                // Melhora a renderização de gráficos
+                "jupyter.themeMatplotlibPlots": true 
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter", // Essencial para .ipynb
+                "ms-toolsai.jupyter-renderers", // Para tabelas e gráficos avançados
+                "ms-python.vscode-pylance"
+            ]
+        }
+    },
+    "forwardPorts": [8888, 6006],
+    "postCreateCommand": "python3 -c 'import torch; import tensorflow as tf; print(\"PyTorch GPU:\", torch.cuda.is_available()); print(\"TF GPU:\", len(tf.config.list_physical_devices(\"GPU\")) > 0)'"
+}
