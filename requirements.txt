@@ -1,0 +1,10 @@
+matplotlib
+pandas
+numpy
+tensorflow
+scikit-learn
+tqdm
+seaborn
+kaggle
+kagglehub
+transformers
