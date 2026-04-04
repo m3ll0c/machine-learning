@@ -8,3 +8,6 @@ seaborn
 kaggle
 kagglehub
 transformers
+tensorflow
+torch
+torchvision
